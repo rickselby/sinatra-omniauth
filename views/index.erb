@@ -1,1 +1,13 @@
 <h1>Sinatra / Omniauth Sample App</h1>
+
+<% if logged_in? %>
+  <form method="post" action="/logout">
+    <input type="hidden" name="authenticity_token" value="<%= request.env["rack.session"]["csrf"] %>">
+    <button type="submit">Logout</button>
+  </form>
+<% else %>
+  <form method="post" action="/auth/developer">
+    <input type="hidden" name="authenticity_token" value="<%= request.env["rack.session"]["csrf"] %>">
+    <button type="submit">Login with Developer</button>
+  </form>
+<% end %>

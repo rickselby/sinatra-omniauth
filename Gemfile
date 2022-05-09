@@ -21,5 +21,6 @@ group :development do
 end
 
 gem 'erubi'
+gem 'omniauth'
 gem 'rack'
 gem 'sinatra'
