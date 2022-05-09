@@ -5,14 +5,39 @@ require 'bundler'
 
 Bundler.require
 
-Dir['./lib/**/*.rb'].sort.each { |file| require file }
+require_relative 'helpers'
 
 configure do
   set :erb, escape_html: true
+  set :sessions, true
   set :show_exceptions, :after_handler if development?
   disable :dump_errors unless development?
 end
 
+use Rack::Session::Cookie
+use OmniAuth::Builder do
+  provider :developer, fields: [:name], uid_field: :name
+end
+
+helpers Helpers
+
 get '/' do
   erb :index
+end
+
+post '/logout' do
+  session.destroy
+  redirect '/'
+end
+
+get '/auth/:provider/callback' do
+  session[:user] = request.env['omniauth.auth']['info']['name']
+  redirect '/'
+end
+
+if development?
+  post '/auth/developer/callback' do
+    session[:user] = request.env['omniauth.auth']['info']['name']
+    redirect '/'
+  end
 end

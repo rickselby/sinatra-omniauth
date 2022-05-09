@@ -9,6 +9,10 @@
 </head>
 
 <body>
+
+<div style="border: 1px solid black; margin-bottom: 2em;">
+  Current user: <%= logged_in? ? session[:user] : 'not logged in' %>
+</div>
 <main class="container" role="main">
   <%== yield %>
 </main>
