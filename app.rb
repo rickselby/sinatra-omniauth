@@ -12,11 +12,12 @@ configure do
   set :sessions, true
   set :show_exceptions, :after_handler if development?
   disable :dump_errors unless development?
-end
 
-use Rack::Session::Cookie
-use OmniAuth::Builder do
-  provider :developer, fields: [:name], uid_field: :name
+  enable :sessions
+  set :session_secret, ENV.fetch('SESSION_SECRET') { SecureRandom.hex(64) }
+  use OmniAuth::Builder do
+    provider :developer, fields: [:name], uid_field: :name
+  end
 end
 
 helpers Helpers
