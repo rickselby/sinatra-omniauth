@@ -23,4 +23,5 @@ end
 gem 'erubi'
 gem 'omniauth'
 gem 'rack'
+gem 'securerandom'
 gem 'sinatra'
