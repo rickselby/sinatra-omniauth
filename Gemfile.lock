@@ -70,7 +70,7 @@ GEM
       rubocop (~> 1.33)
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.5)
-    securerandom (0.2.1)
+    securerandom (0.2.2)
     sinatra (3.0.5)
       mustermann (~> 3.0)
       rack (~> 2.2, >= 2.2.4)
